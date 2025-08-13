@@ -3,7 +3,6 @@ package org.godigit.NewsAnalyzer.Services;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.lang.*;
 import java.util.concurrent.CompletableFuture;
 
 @Service

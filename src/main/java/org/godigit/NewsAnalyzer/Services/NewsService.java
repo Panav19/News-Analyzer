@@ -5,7 +5,6 @@ import org.godigit.NewsAnalyzer.Dto.NewsResponse;
 import org.godigit.NewsAnalyzer.Models.NewsEntity;
 import org.godigit.NewsAnalyzer.Repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,6 +18,7 @@ public class NewsService {
     private String url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=5be2831aec68474f9e6147d1c26bbc2c";
 
     @Autowired
+    
     private NewsRepository newsRepository;
 
     @Async("taskExecutor")
