@@ -13,6 +13,9 @@ public class SentimentService {
 
     @Async("taskExecutor")
     public CompletableFuture<String> detectBiasAsync(String content) {
+        if(content == null || content.trim().isEmpty()) {
+            return CompletableFuture.completedFuture("Neutral");
+        }
         String sentiment = sentimentAnalyzer.analyzeSentiment(content);
         return CompletableFuture.completedFuture(sentiment);
     }
