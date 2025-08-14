@@ -23,7 +23,6 @@ public class NewsService {
 
     @Async("taskExecutor")
     public CompletableFuture<List<Article>> fetchNewsAsync() {
-//        RestTemplate restTemplate = new RestTemplate();
         NewsResponse newsResponse = new RestTemplate().getForObject(url, NewsResponse.class);
         return CompletableFuture.completedFuture(newsResponse.getArticles());
     }
