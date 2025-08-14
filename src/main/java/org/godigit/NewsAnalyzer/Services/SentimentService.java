@@ -16,7 +16,9 @@ public class SentimentService {
         if(content == null || content.trim().isEmpty()) {
             return CompletableFuture.completedFuture("Neutral");
         }
-        String sentiment = sentimentAnalyzer.analyzeSentiment(content);
+        String newContent = "I had a wonderful experience today. Everyone was kind, and the service was excellent!";
+        String sentiment = sentimentAnalyzer.analyzeSentiment(newContent);
+        System.out.println("Sentiment"+sentiment);
         return CompletableFuture.completedFuture(sentiment);
     }
 }

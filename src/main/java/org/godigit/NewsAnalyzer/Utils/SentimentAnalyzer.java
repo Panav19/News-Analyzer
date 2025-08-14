@@ -33,11 +33,13 @@ public class SentimentAnalyzer {
                 case "Negative": totalScore -= 1; break;
                 case "Very negative": totalScore -= 2; break;
             }
+
             sentenceCount++;
         }
-
+        System.out.println("total score"+totalScore);
+        System.out.println(sentenceCount);
         double averageScore = (double) totalScore / sentenceCount;
-        return (averageScore > 1) ? "Positive" : (averageScore < -1) ? "Negative" : "Neutral";
+        return (averageScore >= 1) ? "Positive" : (averageScore <= -1) ? "Negative" : "Neutral";
     }
 
 }

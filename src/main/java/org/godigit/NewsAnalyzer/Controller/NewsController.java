@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.Console;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -32,14 +33,18 @@ public class NewsController {
     private NewsRepository newsRepository;
 
     @GetMapping("/analyze")
-    public CompletableFuture<List<AnalyzedNews>> getAnalyzedNews() {
+    public CompletableFuture<List<AnalyzedNews>> getAnalyzedNews() throws Exception {
         return newsService.fetchNewsAsync().thenCompose(articles -> {
             List<CompletableFuture<AnalyzedNews>> futures = articles.stream()
                     .map(article -> {
 
                         CompletableFuture<String> summaryFuture = summarizerService.summarizeAsync(article.getContent());
                         CompletableFuture<String> biasFuture = sentimentService.detectBiasAsync(article.getContent());
-
+                        try {
+                            System.out.println("BiasFuture is " + biasFuture.get());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         return summaryFuture.thenCombine(biasFuture, (summary, bias) -> {
                             AnalyzedNews analyzedNews = new AnalyzedNews(article.getTitle(), summary, bias);
 
